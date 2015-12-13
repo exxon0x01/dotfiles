@@ -1,23 +1,43 @@
 export EDITOR=vim
-bindkey -e
+bindkey -v
 
 autoload zed
 
+#keybind
 export LANG=ja_JP.UTF-8
 
+#option
+setopt print_eight_bit
 setopt auto_cd
 setopt auto_pushd
 setopt correct
 setopt list_packed
+setopt noautoremoveslash
 setopt complete_aliases
+setopt extended_glob
+setopt prompt_subst
+
+#history
+HISTFILE=~/.zsh_history
+HISTSIZE=1000000
+SAVEHIST=1000000
 
 #alias
 alias ls='ls --color=auto'
+alias la='ls -a'
+alias ll='ls -l'
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias mkdir='mkdir -p'
+alias sudo='sudo '
+ 
 alias emacs='emacs -nw'
 
 #compinit
 autoload -U compinit
 compinit
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 #color
 autoload -U colors; colors
@@ -30,5 +50,10 @@ RPROMPT="%{${fg[cyan]}%}[%~]%{${reset_color}%}"
 PROMPT2="%{${fg[green]}%}%_> %{${reset_color}%}"
 SPROMPT="%{${fg[red]}%}%r is correct? [n,y,a,w]: %{${reset_color}%}"
 
-#lein
-export PATH=$HOME/local/bin:$PATH
+#vcs_info
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' formats '%F{green}(%s)-[%b]%f'
+zstyle ':vcs_info:*' actionformats '%F{red}(%s)-[%b|%a]%f'
+
+precmd () { vcs_info }
+RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
