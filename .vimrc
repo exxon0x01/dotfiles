@@ -17,7 +17,12 @@ set wildmenu wildmode=list:full
 syntax on
 set nohlsearch
 
-setlocal path=.,/usr/include,/usr/lib/gcc/x86_64-pc-cygwin/4.9.3/include/c++/
+setlocal path=.,/usr/include,
+
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
 
 call neobundle#begin(expand('~/.vim/bundle'))
 let g:neobundle_default_git_protocol='https'
