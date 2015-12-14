@@ -16,7 +16,8 @@ set wildmenu wildmode=list:full
 
 syntax on
 set nohlsearch
-set cursorline
+
+setlocal path=.,/usr/include,/usr/lib/gcc/x86_64-pc-cygwin/4.9.3/include/c++/
 
 call neobundle#begin(expand('~/.vim/bundle'))
 let g:neobundle_default_git_protocol='https'
@@ -40,6 +41,16 @@ NeoBundle 'Shougo/vimproc.vim', {
 			\     'unix' : 'gmake',
 			\    },
 			\ }
+
+"Neoinclude
+NeoBundle 'Shougo/neoinclude.vim'
+
+"ultisnips
+NeoBundle 'SirVer/ultisnips'
+
+"Neocomplete
+NeoBundle 'Shogo/neocomplete.vim'
+let g:neocomplete#enable_at_startup = 1
 
 NeoBundleCheck
 call neobundle#end()
