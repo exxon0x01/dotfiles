@@ -15,12 +15,16 @@ set incsearch
 set wildmenu wildmode=list:full
 
 syntax on
+colorscheme elflord
+
+hi Pmenu ctermbg=4
+hi PmenuSel ctermbg=1
+hi PMenuSbar ctermbg=4
+
 set nohlsearch
 
 setlocal path=.,/usr/include,$INCLUDE
 
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 
@@ -50,12 +54,32 @@ NeoBundle 'Shougo/vimproc.vim', {
 "Neoinclude
 NeoBundle 'Shougo/neoinclude.vim'
 
-"ultisnips
-NeoBundle 'SirVer/ultisnips'
 
 "Neocomplete
 NeoBundle 'Shogo/neocomplete.vim'
 let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#skip_auto_completion_time = ""
+let g:neocomplete#enable_ignore_case = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#enable_auto_select = 1
+let g:neocomplete#enable_enable_camel_case_completion = 0
+if !exists('g:neocomplete#keyword_patterns')
+	let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns._ = '\h\w*'
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+"Neosnippet
+NeoBundle "Shougo/neosnippet.vim"
+NeoBundle 'Shougo/neosnippet-snippets'
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+ \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
 
 "Marching
 NeoBundle "osyo-manga/vim-marching"
@@ -65,7 +89,7 @@ let g:marching_enable_neocomplete = 1
 if !exists('g:neocomplete#force_omni_input_patterns')
   let g:neocomplete#force_omni_input_patterns = {}
 endif
-  let g:neocomplete#force_omni_input_patterns.cpp =
+let g:neocomplete#force_omni_input_patterns.cpp =
       \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
 
 NeoBundleCheck
