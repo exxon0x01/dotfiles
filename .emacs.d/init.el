@@ -32,12 +32,14 @@
 (global-set-key "\C-n" 'newline-and-indent)
 (global-set-key "\C-o" 'kill-line)
 
+(require 'generic-x)
+
 ;;package
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
-;(package-refresh-contents)
+(package-refresh-contents)
 
 (defvar my/favorite-packages
     '(
