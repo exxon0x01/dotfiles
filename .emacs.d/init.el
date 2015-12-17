@@ -45,6 +45,8 @@
     '(
       ;;auto-complete
       auto-complete popup auto-complete-c-headers
+      ;;slime
+      slime ac-slime
       ))
 (dolist (package my/favorite-packages)
     (unless (package-installed-p package)
@@ -71,3 +73,13 @@
 
 (add-hook 'c++-mode-hook 'my:ac-c-headers-init)
 (add-hook 'c-mode-hook 'my:ac-c-headers-init)
+
+;;slime
+(setq inferior-lisp-program "sbcl")
+(setq slime-net-coding-system 'utf-8-unix)
+(require 'slime)
+(slime-setup)
+
+(require 'ac-slime)
+(add-hook 'slime-mode-hook 'set-up-slime-ac)
+(add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
