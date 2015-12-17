@@ -39,7 +39,7 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
-(package-refresh-contents)
+(if (not (file-directory-p "~/.emacs.d/elpa")) (package-refresh-contents))
 
 (defvar my/favorite-packages
     '(
