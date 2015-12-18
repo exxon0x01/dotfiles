@@ -19,9 +19,6 @@
 
 (setq-default tab-width 4 indent-tabs-mode nil)
 
-(global-linum-mode t)
-(setq linum-format "%4d ")
-
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;;keybind
@@ -44,7 +41,7 @@
 (defvar my/favorite-packages
     '(
       ;;auto-complete
-      auto-complete popup auto-complete-c-headers
+      auto-complete popup popwin auto-complete-c-headers
       ;;slime
       slime ac-slime
       ))
@@ -78,8 +75,27 @@
 (setq inferior-lisp-program "sbcl")
 (setq slime-net-coding-system 'utf-8-unix)
 (require 'slime)
-(slime-setup)
+(slime-setup '(slime-repl slime-fancy slime-banner))
 
 (require 'ac-slime)
 (add-hook 'slime-mode-hook 'set-up-slime-ac)
 (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+
+;;popwin
+(require 'popwin)
+(setq display-buffer-function 'popwin:display-buffer)
+(push '("*slime-apropos*") popwin:special-display-config)
+;; Macroexpand
+(push '("*slime-macroexpansion*") popwin:special-display-config)
+;; Help
+(push '("*slime-description*") popwin:special-display-config)
+;; Compilation
+(push '("*slime-compilation*" :noselect t) popwin:special-display-config)
+;; Cross-reference
+(push '("*slime-xref*") popwin:special-display-config)
+;; Debugger
+(push '(sldb-mode :stick t) popwin:special-display-config)
+;; REPL
+(push '(slime-repl-mode) popwin:special-display-config)
+;; Connections
+(push '(slime-connection-list-mode) popwin:special-display-config)
