@@ -17,7 +17,7 @@
 
 (setq delete-auto-save-files t)
 
-(setq-default tab-width 4 indent-tabs-mode nil)
+(setq-default tab-width 2 indent-tabs-mode nil)
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -39,15 +39,15 @@
 (if (not (file-directory-p "~/.emacs.d/elpa")) (package-refresh-contents))
 
 (defvar my/favorite-packages
-    '(
-      ;;auto-complete
-      auto-complete popup popwin auto-complete-c-headers
-      ;;slime
-      slime ac-slime
-      ))
+  '(
+    ;;auto-complete
+    auto-complete popup popwin auto-complete-c-headers
+    ;;slime
+    slime ac-slime
+    ))
 (dolist (package my/favorite-packages)
-    (unless (package-installed-p package)
-          (package-install package)))
+  (unless (package-installed-p package)
+      (package-install package)))
 
 ;;auto-complete
 (require 'auto-complete-config)
@@ -58,7 +58,7 @@
 (require 'cc-mode)
 (add-hook 'c-mode-common-hook
           (lambda()
-            (setq c-default-style "k&r")
+            (setq c-default-style "java")
             (setq indent-tabs-mode nil)
             (setq c-basic-offset 2)
             ))
@@ -78,7 +78,7 @@
 (when (eq system-type 'cygwin)
   (defun slime-to-lisp-translation (filename)
     (replace-regexp-in-string
-       "\n" "" (shell-command-to-string
+     "\n" "" (shell-command-to-string
               (format "cygpath.exe --windows %s" filename))))
   (defun lisp-to-slime-translation (filename)
     (replace-regexp-in-string
@@ -86,6 +86,7 @@
               (format "cygpath.exe --unix %s filename"))))
   (setq slime-to-lisp-filename-function 'slime-to-lisp-translation)
   (setq lisp-to-slime-filename-function 'lisp-to-slime-translation))
+;;
 
 (setq slime-net-coding-system 'utf-8-unix)
 (require 'slime)
