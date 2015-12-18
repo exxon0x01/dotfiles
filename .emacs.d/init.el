@@ -33,21 +33,29 @@
 
 ;;package
 (require 'package)
+(require 'cl)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
-(if (not (file-directory-p "~/.emacs.d/elpa")) (package-refresh-contents))
 
-(defvar my/favorite-packages
+(defvar installing-package-list
   '(
     ;;auto-complete
     auto-complete popup popwin auto-complete-c-headers
-    ;;slime
+    ;;common-lisp
     slime ac-slime
+    ;;clojure
+    cider clojure-mode
+    ;;
+    rainbow-delimiters
     ))
-(dolist (package my/favorite-packages)
-  (unless (package-installed-p package)
-      (package-install package)))
+(let ((not-installed (loop for x in installing-package-list
+                           when (not (package-installed-p x))
+                           collect x)))
+  (when not-installed
+    (package-refresh-contents)
+    (dolist (pkg not-installed)
+              (package-install pkg))))
 
 ;;auto-complete
 (require 'auto-complete-config)
