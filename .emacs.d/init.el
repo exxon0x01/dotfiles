@@ -45,7 +45,7 @@
     ;;common-lisp
     slime ac-slime
     ;;clojure
-    cider clojure-mode
+    cider clojure-mode ac-cider
     ;;
     rainbow-delimiters
     ))
@@ -82,7 +82,7 @@
 ;;slime
 (setq inferior-lisp-program "sbcl")
 
-;;setting for cygwin
+;;slime-setting for cygwin
 (when (eq system-type 'cygwin)
   (defun slime-to-lisp-translation (filename)
     (replace-regexp-in-string
@@ -122,3 +122,35 @@
 (push '(slime-repl-mode) popwin:special-display-config)
 ;; Connections
 (push '(slime-connection-list-mode) popwin:special-display-config)
+
+;;rainbow-delimiters
+(require 'rainbow-delimiters)
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+;;using stronger colors
+(require 'cl-lib)
+(require 'color)
+(defun rainbow-delimiters-using-stronger-colors ()
+  (interactive)
+  (cl-loop
+   for index from 1 to rainbow-delimiters-max-face-count
+   do
+   (let ((face (intern (format "rainbow-delimiters-depth-%d-face" index))))
+     (cl-callf color-saturate-name (face-foreground face) 90))))
+(add-hook 'emacs-startup-hook 'rainbow-delimiters-using-stronger-colors)
+
+;;cider
+(require 'cider)
+(require 'clojure-mode)
+(add-hook 'clojure-mode-hook 'cider-mode)
+(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+(setq nrepl-hide-special-buffers t)
+(setq nrepl-buffer-name-show-port t)
+
+(require 'ac-cider)
+(add-hook 'cider-mode-hook 'ac-flyspell-workaround)
+(add-hook 'cider-mode-hook 'ac-cider-setup)
+(add-hook 'cider-repl-mode-hook 'ac-cider-setup)
+(eval-after-load "auto-complete"
+  '(progn
+     (add-to-list 'ac-modes 'cider-mode)
+          (add-to-list 'ac-modes 'cider-repl-mode)))
