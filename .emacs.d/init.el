@@ -7,7 +7,7 @@
 (set-default-coding-systems 'utf-8)
 (prefer-coding-system 'utf-8)
 
-(load-theme 'wheatgrass t)
+(load-theme 'manoj-dark t)
 
 (setq inhibit-startup-message t)
 
@@ -41,13 +41,17 @@
 (defvar installing-package-list
   '(
     ;;auto-complete
-    auto-complete popup popwin auto-complete-c-headers
+    auto-complete popup popwin
+    ;;c/c++
+    auto-complete-c-headers
     ;;common-lisp
     slime ac-slime
     ;;clojure
     cider clojure-mode ac-cider
-    ;;
+    ;;color
     rainbow-delimiters
+    ;;window
+    neotree
     ))
 (let ((not-installed (loop for x in installing-package-list
                            when (not (package-installed-p x))
@@ -123,21 +127,6 @@
 ;; Connections
 (push '(slime-connection-list-mode) popwin:special-display-config)
 
-;;rainbow-delimiters
-(require 'rainbow-delimiters)
-(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-;;using stronger colors
-(require 'cl-lib)
-(require 'color)
-(defun rainbow-delimiters-using-stronger-colors ()
-  (interactive)
-  (cl-loop
-   for index from 1 to rainbow-delimiters-max-face-count
-   do
-   (let ((face (intern (format "rainbow-delimiters-depth-%d-face" index))))
-     (cl-callf color-saturate-name (face-foreground face) 90))))
-(add-hook 'emacs-startup-hook 'rainbow-delimiters-using-stronger-colors)
-
 ;;cider
 (require 'cider)
 (require 'clojure-mode)
@@ -154,3 +143,30 @@
   '(progn
      (add-to-list 'ac-modes 'cider-mode)
           (add-to-list 'ac-modes 'cider-repl-mode)))
+
+;;rainbow-delimiters
+(require 'rainbow-delimiters)
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+;;using stronger colors
+(require 'cl-lib)
+(require 'color)
+(defun rainbow-delimiters-using-stronger-colors ()
+  (interactive)
+  (cl-loop
+   for index from 1 to rainbow-delimiters-max-face-count
+   do
+   (let ((face (intern (format "rainbow-delimiters-depth-%d-face" index))))
+     (cl-callf color-saturate-name (face-foreground face) 90))))
+(add-hook 'emacs-startup-hook 'rainbow-delimiters-using-stronger-colors)
+
+;;neotree
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle) 
+(setq neo-show-hidden-files t)
+(setq neo-keymap-style 'concise)
+(setq neo-smart-open t)
+(when neo-persist-show
+  (add-hook 'popwin:before-popup-hook
+            (lambda () (setq neo-persist-show nil)))
+  (add-hook 'popwin:after-popup-hook
+            (lambda () (setq neo-persist-show t))))
