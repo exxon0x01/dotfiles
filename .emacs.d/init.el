@@ -208,7 +208,6 @@
    do
    (let ((face (intern (format "rainbow-delimiters-depth-%d-face" index))))
      (cl-callf color-saturate-name (face-foreground face) 90))))
-(add-hook 'emacs-startup-hook 'rainbow-delimiters-using-stronger-colors)
 
 ;;neotree
 (require 'neotree)
@@ -225,4 +224,4 @@
 ;;hiwin
 (require 'hiwin)
 (hiwin-activate)
-(set-face-background 'hiwin-face "gray10")
+(set-face-background 'hiwin-face "gray20")
