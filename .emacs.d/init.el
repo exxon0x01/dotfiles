@@ -90,6 +90,8 @@
   '(
     ;;auto-complete
     auto-complete popup popwin
+    ;;snippet
+    yasnippet
     ;;c/c++
     auto-complete-c-headers
     ;;common-lisp
@@ -116,6 +118,10 @@
 (require 'auto-complete-config)
 (ac-config-default)
 (ac-set-trigger-key "TAB")
+
+;;yasnippet
+(require 'yasnippet)
+(yas-global-mode 1)
 
 ;;cc-mode
 (require 'cc-mode)
