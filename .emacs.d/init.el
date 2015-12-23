@@ -102,6 +102,8 @@
     rainbow-delimiters
     ;;window
     neotree hiwin
+    ;;interface
+    helm
     ))
 (let ((not-installed (loop for x in installing-package-list
                            when (not (package-installed-p x))
@@ -231,3 +233,7 @@
 (require 'hiwin)
 (hiwin-activate)
 (set-face-background 'hiwin-face "gray20")
+
+;;helm
+(require 'helm-config)
+(helm-mode 1)
