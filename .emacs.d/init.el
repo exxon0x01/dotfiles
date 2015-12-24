@@ -103,7 +103,7 @@
     ;;window
     neotree hiwin
     ;;interface
-    helm
+    helm magit
     ))
 (let ((not-installed (loop for x in installing-package-list
                            when (not (package-installed-p x))
@@ -237,3 +237,6 @@
 ;;helm
 (require 'helm-config)
 (helm-mode 1)
+
+;;magit
+(require 'magit)
