@@ -17,6 +17,11 @@
 
 (setq delete-auto-save-files t)
 
+
+(global-linum-mode t)
+
+(setq linum-format "%4d|")
+
 (setq-default tab-width 2 indent-tabs-mode nil)
 
 (fset 'yes-or-no-p 'y-or-n-p)
