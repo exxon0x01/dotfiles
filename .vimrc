@@ -1,3 +1,4 @@
+" NeoBundleInstall
 if has('vim_starting')
 	set nocompatible
 
@@ -9,11 +10,13 @@ if has('vim_starting')
 	set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
+"line number
 set number
 
 set incsearch
 set wildmenu wildmode=list:full
 
+"syntax
 syntax on
 colorscheme elflord
 
@@ -23,8 +26,10 @@ hi PMenuSbar ctermbg=4
 
 set nohlsearch
 
+"include path
 setlocal path=.,/usr/include,$INCLUDE
 
+"move on i-mode
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 
