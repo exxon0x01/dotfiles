@@ -235,9 +235,9 @@
             (lambda () (setq neo-persist-show t))))
 
 ;;hiwin
-(require 'hiwin)
-(hiwin-activate)
-(set-face-background 'hiwin-face "gray20")
+;;(require 'hiwin)
+;;(hiwin-activate)
+;;(set-face-background 'hiwin-face "gray20")
 
 ;;helm
 (require 'helm-config)
