@@ -7,6 +7,11 @@
 (set-default-coding-systems 'utf-8)
 (prefer-coding-system 'utf-8)
 
+(setq load-path
+      (append '(
+                "~/dotfiles/.emacs.d"
+                ) load-path))
+
 (load-theme 'manoj-dark t)
 
 (setq inhibit-startup-message t)
@@ -33,6 +38,8 @@
 (global-set-key "\C-l" 'forward-char)
 (global-set-key "\C-n" 'newline-and-indent)
 (global-set-key "\C-o" 'kill-line)
+
+(load "window")
 
 ;;package
 (require 'package)
