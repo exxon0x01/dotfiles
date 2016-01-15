@@ -63,7 +63,7 @@
     ;;color
     rainbow-delimiters
     ;;window
-    neotree hiwin
+    neotree
     ;;interface
     helm magit
     ))
@@ -154,11 +154,6 @@
             (lambda () (setq neo-persist-show nil)))
   (add-hook 'popwin:after-popup-hook
             (lambda () (setq neo-persist-show t))))
-
-;;hiwin
-;;(require 'hiwin)
-;;(hiwin-activate)
-;;(set-face-background 'hiwin-face "gray20")
 
 ;;helm
 (require 'helm-config)
