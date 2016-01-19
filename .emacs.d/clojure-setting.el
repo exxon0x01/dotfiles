@@ -13,3 +13,6 @@
   '(progn
      (add-to-list 'ac-modes 'cider-mode)
           (add-to-list 'ac-modes 'cider-repl-mode)))
+
+(define-key cider-repl-mode-map "\C-j" 'next-line)
+(define-key cider-repl-mode-map "\C-n" 'newline-and-indent)
