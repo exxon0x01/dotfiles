@@ -1,4 +1,5 @@
 (require 'cider)
+
 (require 'clojure-mode)
 (add-hook 'clojure-mode-hook 'cider-mode)
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
@@ -14,5 +15,7 @@
      (add-to-list 'ac-modes 'cider-mode)
           (add-to-list 'ac-modes 'cider-repl-mode)))
 
-(define-key cider-repl-mode-map "\C-j" 'next-line)
-(define-key cider-repl-mode-map "\C-n" 'newline-and-indent)
+(eval-after-load 'cider-repl
+  '(progn
+     (define-key cider-repl-mode-map "\C-j" 'next-line)
+     (define-key cider-repl-mode-map "\C-n" 'newline-and-indent)))
