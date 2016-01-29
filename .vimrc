@@ -3,6 +3,7 @@
 
 ""NeoBundleInstall
 if has('vim_starting')
+	set nocompatible
 	if !isdirectory(expand("~/.vim/bundle/neobundle.vim/"))
 		echo "install neobundle..."
 		:call system("git clone http://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim")
@@ -28,8 +29,12 @@ NeoBundle 'Shougo/vimproc.vim', {
 			\    },
 			\ }
 NeoBundle 'Shogo/neocomplete.vim'
-NeoBundle "Shougo/neosnippet.vim"
+NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'Shougo/neoinclude.vim'
+NeoBundle "tyru/caw.vim.git"
+NeoBundle "t9md/vim-quickhl"
+NeoBundleLazy 'vim-jp/cpp-vim', {'autoload' : {'filetypes' : ['c','cpp']}}
 
 NeoBundleCheck
 call neobundle#end()
@@ -167,3 +172,19 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
+
+""caw
+"comment-out
+nmap <Leader>c <Plug>(caw:i:toggle)
+vmap <Leader>c <Plug>(caw:i:toggle)
+"uncomment-out
+nmap <Leader>C <Plug>(caw:i:uncomment)
+vmap <Leader>C <Plug>(caw:i:uncomment)
+
+""quickhi
+nmap <Space>m <Plug>(quickhl-manual-this)
+xmap <Space>m <Plug>(quickhl-manual-this)
+nmap <Space>M <Plug>(quickhl-manual-reset)
+xmap <Space>M <Plug>(quickhl-manual-reset)
+
+"==================================================
