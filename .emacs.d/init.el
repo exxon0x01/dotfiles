@@ -51,7 +51,7 @@
 (defvar installing-package-list
   '(
     ;;auto-complete
-    auto-complete popup popwin
+    auto-complete popup
     ;;snippet
     yasnippet
     ;;c/c++
@@ -87,41 +87,8 @@
 (require 'yasnippet)
 (yas-global-mode 1)
 
-;;cc-mode
-(require 'cc-mode)
-(add-hook 'c-mode-common-hook
-          (lambda()
-            (setq c-default-style "java")
-            (setq indent-tabs-mode nil)
-            (setq c-basic-offset 2)
-            ))
-(add-to-list 'auto-mode-alist '("\\.h\\' " . c++-mode))
-
-(defun my:ac-c-headers-init ()
-  (require 'auto-complete-c-headers)
-  (add-to-list 'ac-sources 'ac-source-c-headers))
-
-(add-hook 'c++-mode-hook 'my:ac-c-headers-init)
-(add-hook 'c-mode-hook 'my:ac-c-headers-init)
-
-;;popwin
-(require 'popwin)
-(setq display-buffer-function 'popwin:display-buffer)
-(push '("*slime-apropos*") popwin:special-display-config)
-;; Macroexpand
-(push '("*slime-macroexpansion*") popwin:special-display-config)
-;; Help
-(push '("*slime-description*") popwin:special-display-config)
-;; Compilation
-(push '("*slime-compilation*" :noselect t) popwin:special-display-config)
-;; Cross-reference
-(push '("*slime-xref*") popwin:special-display-config)
-;; Debugger
-(push '(sldb-mode :stick t) popwin:special-display-config)
-;; REPL
-(push '(slime-repl-mode) popwin:special-display-config)
-;; Connections
-(push '(slime-connection-list-mode) popwin:special-display-config)
+;;c/c++
+(load "c-cpp-setting")
 
 ;;common lisp
 (load "cl-setting")
@@ -149,11 +116,6 @@
 (setq neo-show-hidden-files t)
 (setq neo-keymap-style 'concise)
 (setq neo-smart-open t)
-(when neo-persist-show
-  (add-hook 'popwin:before-popup-hook
-            (lambda () (setq neo-persist-show nil)))
-  (add-hook 'popwin:after-popup-hook
-            (lambda () (setq neo-persist-show t))))
 
 ;;helm
 (require 'helm-config)
