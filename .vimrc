@@ -15,10 +15,6 @@ let g:neobundle_default_git_protocol='https'
 
 ""NeoBundle list
 NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'kana/vim-submode'
 NeoBundle 'Shougo/vimproc.vim', {
 			\ 'build' : {
 			\     'windows' : 'tools\\update-dll-mingw',
@@ -28,13 +24,25 @@ NeoBundle 'Shougo/vimproc.vim', {
 			\     'unix' : 'gmake',
 			\    },
 			\ }
-NeoBundle 'Shogo/neocomplete.vim'
+NeoBundle 'w0ng/vim-hybrid'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/vimshell.vim'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'kana/vim-submode'
+NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/neoinclude.vim'
-NeoBundle "tyru/caw.vim.git"
-NeoBundle "t9md/vim-quickhl"
-NeoBundleLazy 'vim-jp/cpp-vim', {'autoload' : {'filetypes' : ['c','cpp']}}
+NeoBundle 'tyru/caw.vim.git'
+NeoBundle 't9md/vim-quickhl'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'kien/rainbow_parentheses.vim'
+"lazy load
+NeoBundleLazy 'vim-jp/cpp-vim', {'autoload' : {'filetypes' : ['c' , 'cpp']}}
+NeoBundleLazy 'guns/vim-clojure-static', {'autoload' : {'filetypes' : 'clojure'}}
+NeoBundleLazy 'tpope/vim-fireplace', {'autoload' : {'filetypes' : 'clojure'}}
+NeoBundleLazy 'tpope/vim-classpath', {'autoload' : {'filetypes' : 'clojure'}}
+
 
 NeoBundleCheck
 call neobundle#end()
@@ -48,7 +56,9 @@ call neobundle#end()
 
 ""color scheme
 set background=dark
-colorscheme hybrid
+if  neobundle#is_installed('vim-hybrid')
+	colorscheme hybrid
+endif
 
 ""enable syntax
 syntax on
@@ -125,14 +135,16 @@ nnoremap sq :<C-u>q<CR>
 nnoremap sQ :<C-u>bd<CR>
 nnoremap sb :<C-u>Unite buffer_tab -buffer-name=file<CR>
 nnoremap sB :<C-u>Unite buffer -buffer-name=file<CR>
-call submode#enter_with('bufmove', 'n', '', 's>', '<C-w>>')
-call submode#enter_with('bufmove', 'n', '', 's<', '<C-w><')
-call submode#enter_with('bufmove', 'n', '', 's+', '<C-w>+')
-call submode#enter_with('bufmove', 'n', '', 's-', '<C-w>-')
-call submode#map('bufmove', 'n', '', '>', '<C-w>>')
-call submode#map('bufmove', 'n', '', '<', '<C-w><')
-call submode#map('bufmove', 'n', '', '+', '<C-w>+')
-call submode#map('bufmove', 'n', '', '-', '<C-w>-')
+if neobundle#is_installed('vim-submode')
+	call submode#enter_with('bufmove', 'n', '', 's>', '<C-w>>')
+	call submode#enter_with('bufmove', 'n', '', 's<', '<C-w><')
+	call submode#enter_with('bufmove', 'n', '', 's+', '<C-w>+')
+	call submode#enter_with('bufmove', 'n', '', 's-', '<C-w>-')
+	call submode#map('bufmove', 'n', '', '>', '<C-w>>')
+	call submode#map('bufmove', 'n', '', '<', '<C-w><')
+	call submode#map('bufmove', 'n', '', '+', '<C-w>+')
+	call submode#map('bufmove', 'n', '', '-', '<C-w>-')
+endif
 
 "==================================================
 
@@ -154,14 +166,27 @@ nnoremap <silent> <Leader>uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR
 "show register list
 nnoremap <silent> <Leader>ur :<C-u>Unite -buffer-name=register register<CR>
 
+""vimshell
+nnoremap <silent> <Leader>vs :VimShell<CR>
+
 ""nerdtree
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
 let NERDTreeShowHidden = 1
 
 ""neocomplete
-if filereadable(expand("~/dotfiles/vim/neocomplete"))
-  source ~/dotfiles/vim/neocomplete
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#skip_auto_completion_time = ""
+let g:neocomplete#enable_ignore_case = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#enable_auto_select = 1
+let g:neocomplete#enable_enable_camel_case_completion = 0
+if !exists('g:neocomplete#keyword_patterns')
+	let g:neocomplete#keyword_patterns = {}
 endif
+let g:neocomplete#keyword_patterns._ = '\h\w*'
+inoremap <expr><CR>   pumvisible() ? "\<C-n>" . neocomplete#close_popup()  : "<CR>"
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
 ""neosnippet
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -186,5 +211,36 @@ nmap <Space>m <Plug>(quickhl-manual-this)
 xmap <Space>m <Plug>(quickhl-manual-this)
 nmap <Space>M <Plug>(quickhl-manual-reset)
 xmap <Space>M <Plug>(quickhl-manual-reset)
+
+""quickrun
+let g:quickrun_config = {
+\		"_" : {
+\				"outputter" : "error",
+\				"outputter/error/success" : "buffer",
+\				"outputter/error/error"   : "quickfix",
+\				"outputter/buffer/split" : ":botright 8sp",
+\				"outputter/quickfix/open_cmd" : "copen",
+\				"runner" : "vimproc",
+\				"runner/vimproc/updatetime" : 500,
+\		},
+\		"c" : {
+\				"type" : "c/gcc",
+\		},
+\		"cpp" : {
+\				"type" : "cpp/g++",
+\		},
+\		"python" : {
+\				"type" : "python"
+\		},
+\}
+nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
+
+""rainbow_parentheses
+if neobundle#is_installed('rainbow_parentheses.vim')
+	au VimEnter * RainbowParenthesesToggle
+	au Syntax * RainbowParenthesesLoadRound
+	au Syntax * RainbowParenthesesLoadSquare
+	au Syntax * RainbowParenthesesLoadBraces
+endif
 
 "==================================================
