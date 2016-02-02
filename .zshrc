@@ -23,7 +23,14 @@ HISTSIZE=1000000
 SAVEHIST=1000000
 
 #alias
-alias ls='ls --color=auto'
+case "${OSTYPE}" in
+		darwin*)
+				alias ls='ls -GF'
+				;;
+		linux*)
+				alias ls='ls -F --color=auto'
+				;;
+esac
 alias la='ls -a'
 alias ll='ls -l'
 alias mkdir='mkdir -p'
