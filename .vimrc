@@ -95,6 +95,9 @@ set nobackup
 set autoread
 ""enable mouse control
 set mouse=a
+""no beep
+set visualbell t_vb=
+set noerrorbells
 
 ""keymapping
 let mapleader = ","

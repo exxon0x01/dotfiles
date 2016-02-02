@@ -16,6 +16,7 @@ setopt noautoremoveslash
 setopt complete_aliases
 setopt extended_glob
 setopt prompt_subst
+setopt nolistbeep
 
 #history
 HISTFILE=~/.zsh_history
