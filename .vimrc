@@ -3,12 +3,12 @@
 
 ""NeoBundleInstall
 if has('vim_starting')
-	set nocompatible
-	if !isdirectory(expand("~/.vim/bundle/neobundle.vim/"))
-		echo "install neobundle..."
-		:call system("git clone http://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim")
-	endif
-	set runtimepath+=~/.vim/bundle/neobundle.vim/
+  set nocompatible
+  if !isdirectory(expand("~/.vim/bundle/neobundle.vim/"))
+    echo "install neobundle..."
+    :call system("git clone http://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim")
+  endif
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 call neobundle#begin(expand('~/.vim/bundle'))
 let g:neobundle_default_git_protocol='https'
@@ -16,14 +16,14 @@ let g:neobundle_default_git_protocol='https'
 ""NeoBundle list
 NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/vimproc.vim', {
-			\ 'build' : {
-			\     'windows' : 'tools\\update-dll-mingw',
-			\     'cygwin' : 'make -f make_cygwin.mak',
-			\     'mac' : 'make -f make_mac.mak',
-			\     'linux' : 'make',
-			\     'unix' : 'gmake',
-			\    },
-			\ }
+      \ 'build' : {
+      \     'windows' : 'tools\\update-dll-mingw',
+      \     'cygwin' : 'make -f make_cygwin.mak',
+      \     'mac' : 'make -f make_mac.mak',
+      \     'linux' : 'make',
+      \     'unix' : 'gmake',
+      \    },
+      \ }
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimshell.vim'
@@ -57,7 +57,7 @@ call neobundle#end()
 ""color scheme
 set background=dark
 if  neobundle#is_installed('vim-hybrid')
-	colorscheme hybrid
+  colorscheme hybrid
 endif
 
 ""enable syntax
@@ -82,6 +82,11 @@ set wildmenu wildmode=list:full
 set backspace=start,eol,indent
 ""make tabs as wide as two spaces
 set tabstop=2
+""set autoindent
+set autoindent
+""make tabs as spaces
+set expandtab
+set shiftwidth=2
 ""show the cursor position
 set ruler
 ""show invisible characters
@@ -139,14 +144,14 @@ nnoremap sQ :<C-u>bd<CR>
 nnoremap sb :<C-u>Unite buffer_tab -buffer-name=file<CR>
 nnoremap sB :<C-u>Unite buffer -buffer-name=file<CR>
 if neobundle#is_installed('vim-submode')
-	call submode#enter_with('bufmove', 'n', '', 's>', '<C-w>>')
-	call submode#enter_with('bufmove', 'n', '', 's<', '<C-w><')
-	call submode#enter_with('bufmove', 'n', '', 's+', '<C-w>+')
-	call submode#enter_with('bufmove', 'n', '', 's-', '<C-w>-')
-	call submode#map('bufmove', 'n', '', '>', '<C-w>>')
-	call submode#map('bufmove', 'n', '', '<', '<C-w><')
-	call submode#map('bufmove', 'n', '', '+', '<C-w>+')
-	call submode#map('bufmove', 'n', '', '-', '<C-w>-')
+  call submode#enter_with('bufmove', 'n', '', 's>', '<C-w>>')
+  call submode#enter_with('bufmove', 'n', '', 's<', '<C-w><')
+  call submode#enter_with('bufmove', 'n', '', 's+', '<C-w>+')
+  call submode#enter_with('bufmove', 'n', '', 's-', '<C-w>-')
+  call submode#map('bufmove', 'n', '', '>', '<C-w>>')
+  call submode#map('bufmove', 'n', '', '<', '<C-w><')
+  call submode#map('bufmove', 'n', '', '+', '<C-w>+')
+  call submode#map('bufmove', 'n', '', '-', '<C-w>-')
 endif
 
 "==================================================
@@ -184,7 +189,7 @@ let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#enable_auto_select = 1
 let g:neocomplete#enable_enable_camel_case_completion = 0
 if !exists('g:neocomplete#keyword_patterns')
-	let g:neocomplete#keyword_patterns = {}
+  let g:neocomplete#keyword_patterns = {}
 endif
 let g:neocomplete#keyword_patterns._ = '\h\w*'
 inoremap <expr><CR>   pumvisible() ? "\<C-n>" . neocomplete#close_popup()  : "<CR>"
@@ -196,7 +201,7 @@ imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
- \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+      \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
@@ -217,52 +222,52 @@ xmap <Space>M <Plug>(quickhl-manual-reset)
 
 ""quickrun
 let g:quickrun_config = {
-\		"_" : {
-\				"outputter" : "error",
-\				"outputter/error/success" : "buffer",
-\				"outputter/error/error"   : "quickfix",
-\				"outputter/buffer/split" : ":botright 8sp",
-\				"outputter/quickfix/open_cmd" : "copen",
-\				"runner" : "vimproc",
-\				"runner/vimproc/updatetime" : 500,
-\		},
-\		"c" : {
-\				"type" : "c/gcc",
-\		},
-\		"cpp" : {
-\				"type" : "cpp/g++",
-\		},
-\		"python" : {
-\				"type" : "python"
-\		},
-\}
+      \		"_" : {
+      \				"outputter" : "error",
+      \				"outputter/error/success" : "buffer",
+      \				"outputter/error/error"   : "quickfix",
+      \				"outputter/buffer/split" : ":botright 8sp",
+      \				"outputter/quickfix/open_cmd" : "copen",
+      \				"runner" : "vimproc",
+      \				"runner/vimproc/updatetime" : 500,
+      \		},
+      \		"c" : {
+      \				"type" : "c/gcc",
+      \		},
+      \		"cpp" : {
+      \				"type" : "cpp/g++",
+      \		},
+      \		"python" : {
+      \				"type" : "python"
+      \		},
+      \}
 nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
 
 ""rainbow_parentheses
 "ref. https://github.com/kien/rainbow_parentheses.vim
 let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['black',       'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
-    \ ]
+      \ ['brown',       'RoyalBlue3'],
+      \ ['Darkblue',    'SeaGreen3'],
+      \ ['darkgray',    'DarkOrchid3'],
+      \ ['darkgreen',   'firebrick3'],
+      \ ['darkcyan',    'RoyalBlue3'],
+      \ ['darkred',     'SeaGreen3'],
+      \ ['darkmagenta', 'DarkOrchid3'],
+      \ ['brown',       'firebrick3'],
+      \ ['gray',        'RoyalBlue3'],
+      \ ['black',       'SeaGreen3'],
+      \ ['darkmagenta', 'DarkOrchid3'],
+      \ ['Darkblue',    'firebrick3'],
+      \ ['darkgreen',   'RoyalBlue3'],
+      \ ['darkcyan',    'SeaGreen3'],
+      \ ['darkred',     'DarkOrchid3'],
+      \ ['red',         'firebrick3'],
+      \ ]
 if neobundle#is_installed('rainbow_parentheses.vim')
-	au VimEnter * RainbowParenthesesToggle
-	au Syntax * RainbowParenthesesLoadRound
-	au Syntax * RainbowParenthesesLoadSquare
-	au Syntax * RainbowParenthesesLoadBraces
+  au VimEnter * RainbowParenthesesToggle
+  au Syntax * RainbowParenthesesLoadRound
+  au Syntax * RainbowParenthesesLoadSquare
+  au Syntax * RainbowParenthesesLoadBraces
 endif
 
 "==================================================
