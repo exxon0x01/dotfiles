@@ -106,6 +106,8 @@ set noerrorbells
 
 ""keymapping
 let mapleader = ","
+"return to normal-mode
+inoremap <silent> jj <Esc>
 "move
 nnoremap j gj
 nnoremap k gk
