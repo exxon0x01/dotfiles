@@ -105,7 +105,7 @@ set visualbell t_vb=
 set noerrorbells
 
 ""keymapping
-let mapleader = ","
+let mapleader = "\<Space>"
 "return to normal-mode
 inoremap <silent> jj <Esc>
 "move
@@ -166,15 +166,16 @@ endif
 ""unite
 let g:unite_enable_start_insert=1
 let g:unite_source_history_yank_enable =1
-let g:unite_source_file_mru_limit = 200
+" search a file in the filetree
+nnoremap <silent> <Leader><space> :<C-u>Unite file_rec/async<cr>
 "show yank-history list
-nnoremap <silent> <Leader>uy :<C-u>Unite history/yank<CR>
+nnoremap <silent> <Leader>y :<C-u>Unite history/yank<CR>
 "show buffer list
-nnoremap <silent> <Leader>ub :<C-u>Unite buffer<CR>
+nnoremap <silent> <Leader>b :<C-u>Unite buffer<CR>
 "show current dirctory
-nnoremap <silent> <Leader>uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> <Leader>f :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 "show register list
-nnoremap <silent> <Leader>ur :<C-u>Unite -buffer-name=register register<CR>
+nnoremap <silent> <Leader>r :<C-u>Unite -buffer-name=register register<CR>
 
 ""vimshell
 nnoremap <silent> <Leader>vs :VimShell<CR>
@@ -216,10 +217,10 @@ nmap <Leader>C <Plug>(caw:i:uncomment)
 vmap <Leader>C <Plug>(caw:i:uncomment)
 
 ""quickhi
-nmap <Space>m <Plug>(quickhl-manual-this)
-xmap <Space>m <Plug>(quickhl-manual-this)
-nmap <Space>M <Plug>(quickhl-manual-reset)
-xmap <Space>M <Plug>(quickhl-manual-reset)
+nmap <Leader>m <Plug>(quickhl-manual-this)
+xmap <Leader>m <Plug>(quickhl-manual-this)
+nmap <Leader>M <Plug>(quickhl-manual-reset)
+xmap <Leader>M <Plug>(quickhl-manual-reset)
 
 ""quickrun
 let g:quickrun_config = {
