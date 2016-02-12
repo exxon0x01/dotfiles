@@ -244,30 +244,29 @@ let g:quickrun_config = {
 nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
 
 ""rainbow_parentheses
-"ref. https://github.com/kien/rainbow_parentheses.vim
+"ref. http://mattn.kaoriya.net/software/vim/20150209151638.htm
+autocmd BufEnter *.cljs,*.clj,*.cljs.hl RainbowParenthesesActivate
+autocmd BufEnter *.cljs,*.clj,*.cljs.hl RainbowParenthesesLoadRound
+autocmd BufEnter *.cljs,*.clj,*.cljs.hl RainbowParenthesesLoadSquare
+autocmd BufEnter *.cljs,*.clj,*.cljs.hl RainbowParenthesesLoadBraces
+autocmd BufEnter *.cljs,*.clj,*.cljs.hl setlocal iskeyword+=?,-,*,!,+,/,=,<,>,.,:
 let g:rbpt_colorpairs = [
-      \ ['brown',       'RoyalBlue3'],
-      \ ['Darkblue',    'SeaGreen3'],
-      \ ['darkgray',    'DarkOrchid3'],
+      \ ['darkyellow',  'RoyalBlue3'],
+      \ ['darkgreen',   'SeaGreen3'],
+      \ ['darkcyan',    'DarkOrchid3'],
+      \ ['Darkblue',    'firebrick3'],
+      \ ['DarkMagenta', 'RoyalBlue3'],
+      \ ['darkred',     'SeaGreen3'],
+      \ ['darkyellow',  'DarkOrchid3'],
       \ ['darkgreen',   'firebrick3'],
       \ ['darkcyan',    'RoyalBlue3'],
-      \ ['darkred',     'SeaGreen3'],
-      \ ['darkmagenta', 'DarkOrchid3'],
-      \ ['brown',       'firebrick3'],
-      \ ['gray',        'RoyalBlue3'],
-      \ ['black',       'SeaGreen3'],
-      \ ['darkmagenta', 'DarkOrchid3'],
+      \ ['Darkblue',    'SeaGreen3'],
+      \ ['DarkMagenta', 'DarkOrchid3'],
       \ ['Darkblue',    'firebrick3'],
-      \ ['darkgreen',   'RoyalBlue3'],
       \ ['darkcyan',    'SeaGreen3'],
-      \ ['darkred',     'DarkOrchid3'],
-      \ ['red',         'firebrick3'],
+      \ ['darkgreen',   'RoyalBlue3'],
+      \ ['darkyellow',  'DarkOrchid3'],
+      \ ['darkred',     'firebrick3'],
       \ ]
-if neobundle#is_installed('rainbow_parentheses.vim')
-  au VimEnter * RainbowParenthesesToggle
-  au Syntax * RainbowParenthesesLoadRound
-  au Syntax * RainbowParenthesesLoadSquare
-  au Syntax * RainbowParenthesesLoadBraces
-endif
 
 "==================================================
