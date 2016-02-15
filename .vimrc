@@ -35,6 +35,7 @@ NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/neoinclude.vim'
 NeoBundle 'tyru/caw.vim.git'
 NeoBundle 't9md/vim-quickhl'
+NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'kien/rainbow_parentheses.vim'
 "lazy load
