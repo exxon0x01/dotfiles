@@ -25,18 +25,18 @@ SAVEHIST=1000000
 
 #alias
 case "${OSTYPE}" in
-		darwin*)
-				alias ls='ls -GF'
-				;;
-		linux*)
-				alias ls='ls -F --color=auto'
-				;;
+  darwin*)
+    alias ls='ls -GF'
+    ;;
+  linux*)
+    alias ls='ls -F --color=auto'
+    ;;
 esac
 alias la='ls -a'
 alias ll='ls -l'
 alias mkdir='mkdir -p'
 alias sudo='sudo '
- 
+
 alias emacs='emacs -nw'
 
 #compinit
