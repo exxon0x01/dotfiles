@@ -198,6 +198,7 @@ endif
 let g:neocomplete#keyword_patterns._ = '\h\w*'
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+inoremap <expr><CR>   pumvisible() ?  neocomplete#close_popup()  : "<CR>"
 
 ""neosnippet
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
