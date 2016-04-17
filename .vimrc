@@ -37,6 +37,7 @@ NeoBundle 'tyru/caw.vim.git'
 NeoBundle 't9md/vim-quickhl'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'kien/rainbow_parentheses.vim'
 "lazy load
 NeoBundleLazy 'vim-jp/cpp-vim', {'autoload' : {'filetypes' : ['c' , 'cpp']}}
@@ -246,6 +247,10 @@ let g:quickrun_config = {
       \		},
       \}
 nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
+
+""jedi
+"not display doc
+autocmd FileType python setlocal completeopt-=preview
 
 ""rainbow_parentheses
 "ref. http://mattn.kaoriya.net/software/vim/20150209151638.htm
