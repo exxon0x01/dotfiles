@@ -24,7 +24,6 @@ NeoBundle 'Shougo/vimproc.vim', {
       \     'unix' : 'gmake',
       \    },
       \ }
-NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'scrooloose/nerdtree'
@@ -58,9 +57,7 @@ call neobundle#end()
 
 ""color scheme
 set background=dark
-if  neobundle#is_installed('vim-hybrid')
-  colorscheme hybrid
-endif
+ colorscheme elflord
 
 ""enable syntax
 syntax on
@@ -259,23 +256,5 @@ autocmd BufEnter *.cljs,*.clj,*.cljs.hl RainbowParenthesesLoadRound
 autocmd BufEnter *.cljs,*.clj,*.cljs.hl RainbowParenthesesLoadSquare
 autocmd BufEnter *.cljs,*.clj,*.cljs.hl RainbowParenthesesLoadBraces
 autocmd BufEnter *.cljs,*.clj,*.cljs.hl setlocal iskeyword+=?,-,*,!,+,/,=,<,>,.,:
-let g:rbpt_colorpairs = [
-      \ ['darkyellow',  'RoyalBlue3'],
-      \ ['darkgreen',   'SeaGreen3'],
-      \ ['darkcyan',    'DarkOrchid3'],
-      \ ['Darkblue',    'firebrick3'],
-      \ ['DarkMagenta', 'RoyalBlue3'],
-      \ ['darkred',     'SeaGreen3'],
-      \ ['darkyellow',  'DarkOrchid3'],
-      \ ['darkgreen',   'firebrick3'],
-      \ ['darkcyan',    'RoyalBlue3'],
-      \ ['Darkblue',    'SeaGreen3'],
-      \ ['DarkMagenta', 'DarkOrchid3'],
-      \ ['Darkblue',    'firebrick3'],
-      \ ['darkcyan',    'SeaGreen3'],
-      \ ['darkgreen',   'RoyalBlue3'],
-      \ ['darkyellow',  'DarkOrchid3'],
-      \ ['darkred',     'firebrick3'],
-      \ ]
 
 "==================================================
