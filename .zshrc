@@ -63,3 +63,8 @@ zstyle ':vcs_info:*' actionformats '%F{red}(%s)-[%b|%a]%f'
 
 precmd () { vcs_info }
 RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
+
+#pyenv
+export PYENV_ROOT="${HOME}/.pyenv"
+export PATH=${PYENV_ROOT}/bin:$PATH
+eval "$(pyenv init -)"
