@@ -43,7 +43,7 @@ NeoBundleLazy 'vim-jp/cpp-vim', {'autoload' : {'filetypes' : ['c' , 'cpp']}}
 NeoBundleLazy 'guns/vim-clojure-static', {'autoload' : {'filetypes' : 'clojure'}}
 NeoBundleLazy 'tpope/vim-fireplace', {'autoload' : {'filetypes' : 'clojure'}}
 NeoBundleLazy 'tpope/vim-classpath', {'autoload' : {'filetypes' : 'clojure'}}
-
+NeoBundleLazy 'andviro/flake8-vim', {'autoload' : {'filetypes' : 'python'}}
 
 NeoBundleCheck
 call neobundle#end()
@@ -112,10 +112,6 @@ nnoremap j gj
 nnoremap k gk
 nnoremap gj j
 nnoremap gk k
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-h> <Left>
-inoremap <C-l> <Right>
 "window & tab (with unite&submode)
 "ref. http://qiita.com/tekkoc/items/98adcadfa4bdc8b5a6ca
 nnoremap s <Nop>
@@ -244,10 +240,13 @@ let g:quickrun_config = {
       \		},
       \}
 nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
+nnoremap <silent> <Leader>qr :QuickRun<CR>
+
 
 ""jedi
 "not display doc
 autocmd FileType python setlocal completeopt-=preview
+autocmd FileType clojure setlocal completeopt-=preview
 
 ""rainbow_parentheses
 "ref. http://mattn.kaoriya.net/software/vim/20150209151638.htm
