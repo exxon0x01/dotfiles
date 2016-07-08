@@ -38,12 +38,18 @@ NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'kien/rainbow_parentheses.vim'
+NeoBundle 'lervag/vimtex'
 "lazy load
 NeoBundleLazy 'vim-jp/cpp-vim', {'autoload' : {'filetypes' : ['c' , 'cpp']}}
 NeoBundleLazy 'guns/vim-clojure-static', {'autoload' : {'filetypes' : 'clojure'}}
 NeoBundleLazy 'tpope/vim-fireplace', {'autoload' : {'filetypes' : 'clojure'}}
 NeoBundleLazy 'tpope/vim-classpath', {'autoload' : {'filetypes' : 'clojure'}}
 NeoBundleLazy 'andviro/flake8-vim', {'autoload' : {'filetypes' : 'python'}}
+NeoBundleLazy "lambdalisue/vim-pyenv", {
+      \ "depends": ['davidhalter/jedi-vim'],
+      \ "autoload": {
+      \   "filetypes": "python"
+      \ }}
 
 NeoBundleCheck
 call neobundle#end()
@@ -107,6 +113,7 @@ set noerrorbells
 let mapleader = "\<Space>"
 "return to normal-mode
 inoremap <silent> jj <Esc>
+inoremap <silent> っj <ESC>
 "move
 nnoremap j gj
 nnoremap k gk
@@ -193,6 +200,9 @@ let g:neocomplete#keyword_patterns._ = '\h\w*'
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 inoremap <expr><CR>   pumvisible() ?  neocomplete#close_popup()  : "<CR>"
+hi Pmenu ctermbg=4
+hi PmenuSel ctermbg=1
+hi PMenuSbar ctermbg=4
 
 ""neosnippet
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -242,11 +252,17 @@ let g:quickrun_config = {
 nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
 nnoremap <silent> <Leader>qr :QuickRun<CR>
 
+""vimtex
+let g:tex_flavor='latex'
+let g:vimtex_latexmk_options = '-pdfdvi'
+let g:tex_conceal = ''
+let g:vimtex_imaps_enabled = 0
 
 ""jedi
 "not display doc
 autocmd FileType python setlocal completeopt-=preview
 autocmd FileType clojure setlocal completeopt-=preview
+let $PATH = "~/.pyenv/shims:".$PATH
 
 ""rainbow_parentheses
 "ref. http://mattn.kaoriya.net/software/vim/20150209151638.htm

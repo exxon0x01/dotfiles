@@ -37,7 +37,7 @@ alias ll='ls -l'
 alias mkdir='mkdir -p'
 alias sudo='sudo '
 
-alias emacs='emacs -nw'
+# alias emacs='emacs -nw'
 
 #compinit
 autoload -U compinit
