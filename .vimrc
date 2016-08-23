@@ -36,7 +36,7 @@ NeoBundle 'tyru/caw.vim.git'
 NeoBundle 't9md/vim-quickhl'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'davidhalter/jedi-vim'
+" NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'kien/rainbow_parentheses.vim'
 NeoBundle 'lervag/vimtex'
 "lazy load
@@ -44,13 +44,13 @@ NeoBundleLazy 'vim-jp/cpp-vim', {'autoload' : {'filetypes' : ['c' , 'cpp']}}
 NeoBundleLazy 'guns/vim-clojure-static', {'autoload' : {'filetypes' : 'clojure'}}
 NeoBundleLazy 'tpope/vim-fireplace', {'autoload' : {'filetypes' : 'clojure'}}
 NeoBundleLazy 'tpope/vim-classpath', {'autoload' : {'filetypes' : 'clojure'}}
-NeoBundleLazy 'andviro/flake8-vim', {'autoload' : {'filetypes' : 'python'}}
-NeoBundleLazy "lambdalisue/vim-pyenv", {
-      \ "depends": ['davidhalter/jedi-vim'],
-      \ "autoload": {
-      \   "filetypes": "python"
-      \ }}
-
+" NeoBundleLazy 'andviro/flake8-vim', {'autoload' : {'filetypes' : 'python'}}
+" NeoBundleLazy "lambdalisue/vim-pyenv", {
+"       \ "depends": ['davidhalter/jedi-vim'],
+"       \ "autoload": {
+"       \   "filetypes": "python"
+"       \ }}
+"
 NeoBundleCheck
 call neobundle#end()
 
